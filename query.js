@@ -21,4 +21,25 @@ function viewDep() {
       });
 }
 
-viewDep();
+function viewRoles() {
+    const sql = `SELECT * FROM role`;
+    db.query(sql, (err, rows) => {
+        console.info({
+          message: 'success',
+          data: rows
+        });
+      });
+}
+
+function viewEmployee() {
+    const sql = `SELECT * FROM employee`;
+    db.query(sql, (err, rows) => {
+        console.table(rows
+        );
+      });
+}
+
+
+
+
+viewEmployee();
