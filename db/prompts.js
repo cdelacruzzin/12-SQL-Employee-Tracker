@@ -18,9 +18,38 @@ const questions = [     //prompts to ask user
     }
 ]
 function Prompts (){    //function returns the promise for the inquirer
-    return inquirer.prompt(questions);
+    inquirer.prompt(questions).then((response) => {
+        const answer = Object.values(response);
+        resSwitch(answer[0]);
+    });
 }
 
+function resSwitch(answer) {
+    switch (answer) {
+
+        case "view all departments": ;
+        break;
+
+        case "view all roles": ;
+        break;
+
+        case "view all employees": ;
+        break;
+
+        case "add a department": ;
+        break;
+
+        case "add a role": ;
+        break;
+
+        case "add an employee": ;
+        break;
+
+        case "update an employee role": ;
+        break;
+    };
+
+}
 Prompts();
 
 module.exports = Prompts;   //exports Prompts
