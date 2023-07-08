@@ -1,15 +1,16 @@
 const Prompts= require('./prompts');
 
-Prompts().then((responses) => {
-    console.log(responses);  // log the user's responses
-});
+Prompts();
+const answer = Prompts.answer;
 
+console.log(answer);
 
 const express = require('express');
 const mysql = require('mysql2');
 
 const port = process.env.DA_PORT || 3001;
 const app = express();
+
 
 
 
@@ -22,21 +23,6 @@ const db = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function resSwitch(answer) {

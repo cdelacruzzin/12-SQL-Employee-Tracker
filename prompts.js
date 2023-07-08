@@ -19,7 +19,10 @@ const questions = [
 ];
 
 function Prompts() {
-    return inquirer.prompt(questions);
+    return inquirer.prompt(questions).then((responses) => {
+        answer = Object.values(responses)[0];
+        console.log(answer);  // log the user's responses
+    });;
 }
 
 module.exports = Prompts;
