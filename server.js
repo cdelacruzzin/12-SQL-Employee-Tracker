@@ -1,4 +1,4 @@
-const prompts = require ('./db/index');
+const prompts = require ('./db/prompts');
 
 prompts().then( (response) => {
     console.log("hi: ", response);
