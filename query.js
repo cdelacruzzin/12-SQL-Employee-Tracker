@@ -13,31 +13,57 @@ const db = mysql.createConnection({
 
 function viewDep() {
     const sql = `SELECT * FROM department`;
-    db.query(sql, (err, rows) => {
-        console.log({
-          message: 'success',
-          data: rows
-        });
-      });
+    db.query(sql, (err, rows) => console.table(rows));
 }
 
 function viewRoles() {
     const sql = `SELECT * FROM role`;
-    db.query(sql, (err, rows) => {
-        console.info({
-          message: 'success',
-          data: rows
-        });
-      });
+    db.query(sql, (err, rows) => console.table(rows));
 }
 
 function viewEmployee() {
     const sql = `SELECT * FROM employee`;
-    db.query(sql, (err, rows) => console.table(rows));
-      
+    db.query(sql, (err, rows) => console.table(rows));  
+}
+
+function addDept() {
+
+    const values = `8, "chef"`;
+    const sql = `INSERT INTO department (id, department_name)
+    VALUES (${values})`;
+
+    db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));  
+}
+
+function addRole() {
+
+    const values = `12, "head chef", 6000.00, 8`;
+    const sql = `INSERT INTO role (id, title, salary, department_id)
+    VALUES (${values})`;
+
+    db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));  
 }
 
 
 
 
+
+
+
+
+addRole();
+
+
+
+
+
+
+
+viewRoles();
+viewDep();
 viewEmployee();
+
+
+
+
+
