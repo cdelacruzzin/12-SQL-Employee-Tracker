@@ -33,10 +33,8 @@ function viewRoles() {
 
 function viewEmployee() {
     const sql = `SELECT * FROM employee`;
-    db.query(sql, (err, rows) => {
-        console.table(rows
-        );
-      });
+    db.query(sql, (err, rows) => console.table(rows));
+      
 }
 
 
