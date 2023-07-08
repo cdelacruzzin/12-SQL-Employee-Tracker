@@ -44,14 +44,21 @@ function addRole() {
     db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));  
 }
 
+function addEmployee() {
+
+    const values = `5, 'pawa', 'raca', 8, 2`;
+    const sql = `INSERT INTO role employee (id,  first_name, last_name, role_id, manager_id)
+    VALUES (${values})`;
+
+    db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));  
+}
 
 
 
 
 
 
-
-addRole();
+addEmployee();
 
 
 
