@@ -17,30 +17,37 @@ function resSwitch(response) {
     switch (response) {
         case "view all departments": 
         viewDep();
+        runPrompts();
             break;
     
         case "view all roles": 
         viewRoles();
+        runPrompts();
             break;
     
         case "view all employees": 
         viewEmployee();
+        runPrompts();
             break;
     
         case "add a department": 
         addDept();
+        runPrompts();
             break;
     
         case "add a role": 
         addRole();
+        runPrompts();
             break;
     
         case "add an employee": 
         addEmployee();
+        runPrompts();
             break;
     
         case "update an employee role": 
         updateEmployeeRole();
+        runPrompts();
             break;
     
         default:
