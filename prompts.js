@@ -18,12 +18,11 @@ const questions = [
     }
 ];
 
-function Prompts() {
-    return inquirer.prompt(questions).then((responses) => {
-        answer = Object.values(responses)[0];
-        console.log(answer);  // log the user's responses
-    });;
+async function Prompts() {
+    const responses = await inquirer.prompt(questions);
+    const answer = Object.values(responses)[0];
+    return answer;
 }
 
-module.exports = Prompts;
+module.exports = {Prompts};
 
