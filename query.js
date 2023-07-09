@@ -99,7 +99,7 @@ updateEmployeeRole();
 // viewEmployee();
 
 
-module.exports = { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee }
+module.exports = { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee, updateEmployeeRole }
 
 
 

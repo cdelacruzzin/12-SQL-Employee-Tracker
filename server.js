@@ -1,56 +1,46 @@
-const Prompts= require('./prompts');
+const {Prompts}= require('./prompts');
 
 
 
+async function runPrompts() {
+    const response = await Prompts();
+    console.log('users answer is ', response);
+    resSwitch(response);
+}
 
-Prompts();
-const answer = Prompts.answer;
+runPrompts();
 
-console.log(answer);
+// console.log("view all departments" === answer);
+const  { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee, updateEmployeeRole } = require('./query');
 
-const express = require('express');
-
-
-const port = process.env.DA_PORT || 3001;
-const app = express();
-
-
-
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-
-
-function resSwitch(answer) {
-    switch (answer) {
+function resSwitch(response) {
+    switch (response) {
         case "view all departments": 
-            ;
+        viewDep();
             break;
     
         case "view all roles": 
-            return "view all roles.";
+        viewRoles();
             break;
     
         case "view all employees": 
-            return "view all employees.";
+        viewEmployee();
             break;
     
         case "add a department": 
-            return "add a department.";
+        addDept();
             break;
     
         case "add a role": 
-            return "add a role.";
+        addRole();
             break;
     
         case "add an employee": 
-            return "add an employee.";
+        addEmployee();
             break;
     
         case "update an employee role": 
-            return "update an employee role.";
+        updateEmployeeRole();
             break;
     
         default:
