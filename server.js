@@ -1,4 +1,4 @@
-const {Prompts, deptInquiry}= require('./prompts');
+const {Prompts, deptInquiry, roleInquiry}= require('./prompts');
 
 
 
@@ -11,6 +11,11 @@ runPrompts();
 
 async function addDeptPrompt() {
     const response = await deptInquiry(runPrompts);
+    console.log(response);
+}
+
+async function addRolePrompt() {
+    const response = await roleInquiry(runPrompts);
     console.log(response);
 }
 
@@ -37,13 +42,11 @@ function resSwitch(response) {
             break;
     
         case "add a role": 
-        addRole();
-        runPrompts();
+        addRolePrompt();
             break;
     
         case "add an employee": 
-        addEmployee();
-        runPrompts();
+        addRolePrompt();
             break;
     
         case "update an employee role": 

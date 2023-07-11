@@ -65,9 +65,15 @@ async function deptInquiry(callback) {
     const responses = await inquirer.prompt(depPrompt);
     const anser = Object.values(responses);
     addDept(anser, callback);
-    
 }
 
-module.exports = {Prompts, deptInquiry};
+async function roleInquiry(callback) {
+    const responses = await inquirer.prompt(rolePrompt);
+    const anser = Object.values(responses);
+    addDept(anser, callback);
+}
+
+
+module.exports = {Prompts, deptInquiry, roleInquiry};
 
  

@@ -51,7 +51,12 @@ function addDept(values, callback) {
 
 function addRole(values) {
 
-    values = `12, "head chef", 6000.00, 8`;
+    const id = parseInt(values[0]);
+    const title = values[1];
+    const salary = parseInt(values[2]);
+    const depId =  parseInt(values[3]);
+    values = `${id}, "${title}", ${salary}, ${depId}`
+
     const sql = `INSERT INTO role (id, title, salary, department_id)
     VALUES (${values})`;
 
