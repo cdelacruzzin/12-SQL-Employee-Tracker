@@ -18,6 +18,19 @@ const questions = [
     }
 ];
 
+const depPrompt = [
+    {
+        type: 'text',
+        message: 'enter a department id:',
+        name: 'id'
+    },
+    {
+        type: 'text',
+        message: 'enter a department name:',
+        name: 'title'
+    }
+]
+
 async function Prompts() {
     const responses = await inquirer.prompt(questions);
     const answer = Object.values(responses)[0];

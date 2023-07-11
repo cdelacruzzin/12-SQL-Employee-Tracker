@@ -7,7 +7,6 @@ async function runPrompts() {
     console.log('users answer is \n', response);
     resSwitch(response);
 }
-
 runPrompts();
 
 // console.log("view all departments" === answer);

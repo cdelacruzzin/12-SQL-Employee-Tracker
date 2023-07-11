@@ -32,6 +32,7 @@ function viewEmployee() {
 }
 
 function addDept(values) {
+    //add if values already exist, show message
 
     values = `8, "chef"`;
     const sql = `INSERT INTO department (id, department_name)
