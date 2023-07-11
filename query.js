@@ -43,7 +43,6 @@ function addDept(values, callback) {
 
     db.query(sql, (err, rows) => {
         console.log(`successfully added (${values}) to database`)
-        console.log(values, 'hello')
         callback();
     });
 }
@@ -65,7 +64,13 @@ function addRole(values) {
 
 function addEmployee(values) {
 
-    values = `5, 'pawa', 'raca', 8, 2`;
+    const id = parseInt(values[0]);
+    const fName = values[1];
+    const lName = values[2];
+    const roleId = parseInt(values[3]);
+    const manId =  parseInt(values[4]);
+    values = `${id}, "${fName}", "${lName}", ${roleId}, ${manId}`
+    
     const sql = `INSERT INTO employee (id,  first_name, last_name, role_id, manager_id)
     VALUES (${values})`;
 

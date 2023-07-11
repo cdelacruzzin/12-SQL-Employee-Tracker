@@ -97,14 +97,14 @@ async function deptInquiry(callback) {
 }
 
 async function roleInquiry(callback) {
-    const responses = await inquirer.prompt(employeePrompt);
+    const responses = await inquirer.prompt(rolePrompt);
     const anser = Object.values(responses);
     addDept(anser, callback);
 }
 
 
 async function employeeInquiry(callback) {
-    const responses = await inquirer.prompt(rolePrompt);
+    const responses = await inquirer.prompt(employeePrompt);
     const anser = Object.values(responses);
     addDept(anser, callback);
 }
