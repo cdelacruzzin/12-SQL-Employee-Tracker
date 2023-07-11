@@ -21,13 +21,11 @@ function resSwitch(response) {
             break;
     
         case "view all roles": 
-        viewRoles();
-        runPrompts();
+        viewRoles(runPrompts);
             break;
     
         case "view all employees": 
-        viewEmployee();
-        runPrompts();
+        viewEmployee(runPrompts);
             break;
     
         case "add a department": 
