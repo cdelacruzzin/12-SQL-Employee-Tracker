@@ -1,6 +1,7 @@
 
 require('dotenv').config();
 const mysql = require('mysql2');
+// require('console.table');
 
 
 const db = mysql.createConnection({
@@ -13,6 +14,7 @@ const db = mysql.createConnection({
 
 function viewDep() {
     const sql = `SELECT * FROM department`;
+    console.log('\n');
     db.query(sql, (err, rows) => console.table(rows));
 }
 
@@ -93,7 +95,7 @@ function updateEmployeeRole() {
 }
 
 // viewEmployee();
-updateEmployeeRole();
+// updateEmployeeRole();
 // viewRoles();
 // viewDep();
 // viewEmployee();

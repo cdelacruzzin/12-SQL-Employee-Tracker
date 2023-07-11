@@ -4,7 +4,7 @@ const {Prompts}= require('./prompts');
 
 async function runPrompts() {
     const response = await Prompts();
-    console.log('users answer is ', response);
+    console.log('users answer is \n', response);
     resSwitch(response);
 }
 
@@ -14,8 +14,10 @@ runPrompts();
 const  { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee, updateEmployeeRole } = require('./query');
 
 function resSwitch(response) {
+    console.log('\n');
     switch (response) {
         case "view all departments": 
+
         viewDep();
         runPrompts();
             break;
