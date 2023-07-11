@@ -31,15 +31,19 @@ function viewEmployee() {
     db.query(sql, (err, rows) => console.table(rows));
 }
 
-function addDept(values) {
-    //add if values already exist, show message
 
-    values = `8, "chef"`;
-    const sql = `INSERT INTO department (id, department_name)
-    VALUES (${values})`;
 
-    db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));
+//add if values already exist, show message
+function addDept(values, callback) {
+    console.log(values, 'hello');
+    const sql = `INSERT INTO department (id, department_name) VALUES (${values})`;
+
+    db.query(sql, (err, rows) => {
+        console.log(`successfully added (${values}) to database`)
+        callback();
+    });
 }
+
 
 function addRole(values) {
 

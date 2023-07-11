@@ -1,6 +1,7 @@
 
 const inquirer = require ('inquirer');
-
+const { addDept } = require('./query');
+const {runPrompts} = require('./server');
 const questions = [
     {
         type: 'list',
@@ -37,5 +38,13 @@ async function Prompts() {
     return answer;
 }
 
-module.exports = {Prompts};
+async function deptInquiry(callback) {
+    const responses = await inquirer.prompt(depPrompt);
+    const anser = Object.values(responses);
+    addDept(anser, callback);
+    
+}
 
+module.exports = {Prompts, deptInquiry};
+
+ 

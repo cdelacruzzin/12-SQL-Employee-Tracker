@@ -1,4 +1,4 @@
-const {Prompts}= require('./prompts');
+const {Prompts, deptInquiry}= require('./prompts');
 
 
 
@@ -8,6 +8,11 @@ async function runPrompts() {
     resSwitch(response);
 }
 runPrompts();
+
+async function addDeptPrompt() {
+    const response = await deptInquiry(runPrompts);
+    console.log(response);
+}
 
 // console.log("view all departments" === answer);
 const  { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee, updateEmployeeRole } = require('./query');
@@ -28,8 +33,7 @@ function resSwitch(response) {
             break;
     
         case "add a department": 
-        addDept();
-        runPrompts();
+        addDeptPrompt();
             break;
     
         case "add a role": 
@@ -52,3 +56,4 @@ function resSwitch(response) {
     }
 }
 
+module.exports = {runPrompts};
