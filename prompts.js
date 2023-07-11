@@ -54,6 +54,35 @@ const rolePrompt = [
     },
 ];
 
+const employeePrompt = [
+    {
+        type: 'text',
+        message: 'enter an employee id:',
+        name: 'id'
+    },
+    {
+        type: 'text',
+        message: 'enter a first name:',
+        name: 'fName'
+    },
+    {
+        type: 'text',
+        message: 'enter a last name:',
+        name: 'lName'
+    },
+    {
+        type: 'text',
+        message: 'enter a role id:',
+        name: 'roleId'
+    },
+    {
+        type: 'text',
+        message: 'enter a manager id:',
+        name: 'manId'
+    },
+];
+
+
 
 async function Prompts() {
     const responses = await inquirer.prompt(questions);
@@ -68,12 +97,20 @@ async function deptInquiry(callback) {
 }
 
 async function roleInquiry(callback) {
+    const responses = await inquirer.prompt(employeePrompt);
+    const anser = Object.values(responses);
+    addDept(anser, callback);
+}
+
+
+async function employeeInquiry(callback) {
     const responses = await inquirer.prompt(rolePrompt);
     const anser = Object.values(responses);
     addDept(anser, callback);
 }
 
 
-module.exports = {Prompts, deptInquiry, roleInquiry};
+
+module.exports = {Prompts, deptInquiry, roleInquiry, employeeInquiry};
 
  
