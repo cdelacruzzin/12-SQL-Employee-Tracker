@@ -12,10 +12,13 @@ const db = mysql.createConnection({
 });
 
 
-function viewDep() {
+function viewDep(callback) {
     const sql = `SELECT * FROM department`;
     console.log('\n');
-    db.query(sql, (err, rows) => console.table(rows));
+    db.query(sql, (err, rows) => {
+        console.table(rows)
+        callback();  
+    });
 }
 
 function viewRoles() {

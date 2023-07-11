@@ -17,9 +17,7 @@ function resSwitch(response) {
     console.log('\n');
     switch (response) {
         case "view all departments": 
-
-        viewDep();
-        runPrompts();
+        viewDep(runPrompts);
             break;
     
         case "view all roles": 
