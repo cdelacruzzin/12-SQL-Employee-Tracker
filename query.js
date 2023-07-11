@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const mysql = require('mysql2');
-// require('console.table');
+
 
 
 const db = mysql.createConnection({
@@ -35,11 +35,15 @@ function viewEmployee() {
 
 //add if values already exist, show message
 function addDept(values, callback) {
-    console.log(values, 'hello');
-    const sql = `INSERT INTO department (id, department_name) VALUES (${values})`;
+    const id = parseInt(values[0]);
+    const title = values[1];
+
+    console.log(id,' ', title);
+    const sql = `INSERT INTO department (id, department_name) VALUES (${id}, "${title}")`;
 
     db.query(sql, (err, rows) => {
         console.log(`successfully added (${values}) to database`)
+        console.log(values, 'hello')
         callback();
     });
 }

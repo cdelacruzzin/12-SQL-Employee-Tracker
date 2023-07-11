@@ -56,4 +56,4 @@ function resSwitch(response) {
     }
 }
 
-module.exports = {runPrompts};
+// module.exports = {runPrompts};

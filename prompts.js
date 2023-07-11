@@ -1,7 +1,6 @@
 
 const inquirer = require ('inquirer');
 const { addDept } = require('./query');
-const {runPrompts} = require('./server');
 const questions = [
     {
         type: 'list',
@@ -30,7 +29,31 @@ const depPrompt = [
         message: 'enter a department name:',
         name: 'title'
     }
-]
+];
+
+const rolePrompt = [
+    {
+        type: 'text',
+        message: 'enter a role id:',
+        name: 'id'
+    },
+    {
+        type: 'text',
+        message: 'enter a role name:',
+        name: 'title'
+    },
+    {
+        type: 'text',
+        message: 'enter a salary:',
+        name: 'salary'
+    },
+    {
+        type: 'text',
+        message: 'enter a department id:',
+        name: 'depId'
+    },
+];
+
 
 async function Prompts() {
     const responses = await inquirer.prompt(questions);
