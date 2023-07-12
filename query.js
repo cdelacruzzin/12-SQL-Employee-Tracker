@@ -48,7 +48,7 @@ function addDept(values, callback) {
 }
 
 
-function addRole(values) {
+function addRole(values, callback) {
 
     const id = parseInt(values[0]);
     const title = values[1];
@@ -59,10 +59,13 @@ function addRole(values) {
     const sql = `INSERT INTO role (id, title, salary, department_id)
     VALUES (${values})`;
 
-    db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));
+    db.query(sql, (err, rows) => {
+        console.log(`successfully added (${values}) to database`)
+        callback();
+    });
 }
 
-function addEmployee(values) {
+function addEmployee(values, callback) {
 
     const id = parseInt(values[0]);
     const fName = values[1];
@@ -74,13 +77,16 @@ function addEmployee(values) {
     const sql = `INSERT INTO employee (id,  first_name, last_name, role_id, manager_id)
     VALUES (${values})`;
 
-    db.query(sql, (err, rows) => console.log(`successfully added (${values}) to database`));
+    db.query(sql, (err, rows) => {
+        console.log(`successfully added (${values}) to database`)
+        callback();
+    });
 }
 
-function updateEmployeeRole() {
+function updateEmployeeRole(values, callback) {
 
-    const role_id = 3;
-    const id = 1;
+    const role_id = parseInt(values[0]);
+    const id = parseInt(values[1]);
 
     const sql = `SELECT * FROM employee WHERE id = ?`;
 
@@ -110,6 +116,7 @@ function updateEmployeeRole() {
                     console.log(err);
                 } 
                 console.log('Employee role updated successfully.');
+                callback();
             });
         });
 

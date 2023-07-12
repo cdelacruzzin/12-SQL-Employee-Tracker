@@ -1,6 +1,6 @@
 
 const inquirer = require ('inquirer');
-const { addDept } = require('./query');
+const { addDept, addRole, addEmployee, updateEmployeeRole } = require('./query');
 const questions = [
     {
         type: 'list',
@@ -113,18 +113,18 @@ async function deptInquiry(callback) {
 async function roleInquiry(callback) {
     const responses = await inquirer.prompt(rolePrompt);
     const anser = Object.values(responses);
-    addDept(anser, callback);
+    addRole(anser, callback);
 }
 async function employeeInquiry(callback) {
     const responses = await inquirer.prompt(employeePrompt);
     const anser = Object.values(responses);
-    addDept(anser, callback);
+    addEmployee(anser, callback);
 }
 
 async function employeeUpdate(callback) {
     const responses = await inquirer.prompt(updatePrompt);
     const anser = Object.values(responses);
-    addDept(anser, callback);
+    updateEmployeeRole(anser, callback);
 }
 
 module.exports = {Prompts, deptInquiry, roleInquiry, employeeInquiry, employeeUpdate};
