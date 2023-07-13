@@ -116,8 +116,14 @@ function addEmployee(values, callback) {
     const fName = values[1];
     const lName = values[2];
     const roleId = parseInt(values[3]);
-    const manId = parseInt(values[4]);
+    var manId = values[4];
+
+    if(values[4] === "") {
+        manId = "NULL";
+    }
+
     values = `${id}, "${fName}", "${lName}", ${roleId}, ${manId}`
+    console.log('manid: ', manId);
 
     exists(id, 'employee', 'id')    //calls the exists function to check if id already exists in department
         .then(data => {
@@ -137,6 +143,7 @@ function addEmployee(values, callback) {
         })
         .catch(err => console.log(err));
 }
+
 
 function updateEmployeeRole(values, callback) {
 
