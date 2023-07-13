@@ -17,7 +17,7 @@ function viewDep(callback) {
     console.log('\n');
     db.query(sql, (err, rows) => {
         console.table(rows)
-        callback();  
+        callback();
     });
 }
 
@@ -25,7 +25,7 @@ function viewRoles(callback) {
     const sql = `SELECT * FROM role`;
     db.query(sql, (err, rows) => {
         console.table(rows)
-        callback();  
+        callback();
     });
 }
 
@@ -33,9 +33,31 @@ function viewEmployee(callback) {
     const sql = `SELECT * FROM employee`;
     db.query(sql, (err, rows) => {
         console.table(rows)
-        callback();  
+        callback();
     });
 }
+
+
+function exists(verify, table, column) {
+
+    // returns a promise that provides a boolean indicating whether the record exists when it resolves
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT IF (EXISTS (SELECT * FROM ${table} WHERE ${column} = ${verify}), "exists", "does not exist") AS result`;
+        //returns {result: 'exists'} or {result: 'does not exist'}
+
+        db.query(sql, (err, rows) => {
+            const result = rows[0].result//returns only the value of the key
+            if (result === "exists") {
+                return true;    //returns true if exists
+            }
+            return false; //returns true if does not exist
+        });
+    });
+}
+exists(1, 'department', 'id')
+    .then(verify => console.log(verify))
+    .catch(err => console.error(err));
+
 
 
 
@@ -44,7 +66,7 @@ function addDept(values, callback) {
     const id = parseInt(values[0]);
     const title = values[1];
 
-    console.log(id,' ', title);
+    console.log(id, ' ', title);
     const sql = `INSERT INTO department (id, department_name) VALUES (${id}, "${title}")`;
 
     db.query(sql, (err, rows) => {
@@ -59,8 +81,9 @@ function addRole(values, callback) {
     const id = parseInt(values[0]);
     const title = values[1];
     const salary = parseInt(values[2]);
-    const depId =  parseInt(values[3]);
+    const depId = parseInt(values[3]);
     values = `${id}, "${title}", ${salary}, ${depId}`
+
 
     const sql = `INSERT INTO role (id, title, salary, department_id)
     VALUES (${values})`;
@@ -77,9 +100,9 @@ function addEmployee(values, callback) {
     const fName = values[1];
     const lName = values[2];
     const roleId = parseInt(values[3]);
-    const manId =  parseInt(values[4]);
+    const manId = parseInt(values[4]);
     values = `${id}, "${fName}", "${lName}", ${roleId}, ${manId}`
-    
+
     const sql = `INSERT INTO employee (id,  first_name, last_name, role_id, manager_id)
     VALUES (${values})`;
 
@@ -116,11 +139,11 @@ function updateEmployeeRole(values, callback) {
                 return;
             }
 
-            const sql =  `UPDATE employee SET role_id = ? WHERE id = ?`;
+            const sql = `UPDATE employee SET role_id = ? WHERE id = ?`;
             db.query(sql, [role_id, id], (err, result) => {
                 if (err) {
                     console.log(err);
-                } 
+                }
                 console.log('Employee role updated successfully.');
                 callback();
             });
