@@ -21,14 +21,20 @@ function viewDep(callback) {
     });
 }
 
-function viewRoles() {
+function viewRoles(callback) {
     const sql = `SELECT * FROM role`;
-    db.query(sql, (err, rows) => console.table(rows));
+    db.query(sql, (err, rows) => {
+        console.table(rows)
+        callback();  
+    });
 }
 
-function viewEmployee() {
+function viewEmployee(callback) {
     const sql = `SELECT * FROM employee`;
-    db.query(sql, (err, rows) => console.table(rows));
+    db.query(sql, (err, rows) => {
+        console.table(rows)
+        callback();  
+    });
 }
 
 
