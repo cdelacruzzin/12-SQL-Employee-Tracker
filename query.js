@@ -43,7 +43,7 @@ function exists(verify, table, column) {
     // returns a promise that provides a boolean indicating whether the record exists when it resolves
     return new Promise((resolve, reject) => {
         const sql = `SELECT IF (EXISTS (SELECT * FROM ${table} WHERE ${column} = ${verify}), "exists", "does not exist") AS result`;
-        
+
         db.query(sql, (err, rows) => {
             if (err) {
                 reject(err); // rejects the promise if there's an error
@@ -62,19 +62,24 @@ function addDept(values, callback) {
     const title = values[1];
 
 
-    exists(1, 'department', 'id')
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
-    
-    console.log(id, ' ', title);
-    const sql = `INSERT INTO department (id, department_name) VALUES (${id}, "${title}")`;
+    exists(id, 'department', 'id')  //calls the exists function to check if id already exists in department
+        .then(data => {
+            if (!data) {    //if it doesn't exist, it inserts the new value
+                console.log(id, ' ', title);
+                const sql = `INSERT INTO department (id, department_name) VALUES (${id}, "${title}")`;
+
+                db.query(sql, (err, rows) => {
+                    console.log(`successfully added (${values}) to database`)
+                    callback();
+                });
+            }
+            else {  // if it does exist, it will log a message
+                console.log(`department with id: ${id} already exists`);
+                callback();
+            }
+        })
+        .catch(err => console.error(err));
 }
-    // db.query(sql, (err, rows) => {
-    //     console.log(`successfully added (${values}) to database`)
-    //     callback();
-    // });
-
-
 
 function addRole(values, callback) {
 
@@ -82,16 +87,27 @@ function addRole(values, callback) {
     const title = values[1];
     const salary = parseInt(values[2]);
     const depId = parseInt(values[3]);
-    values = `${id}, "${title}", ${salary}, ${depId}`
+    values = `${id}, "${title}", ${salary}, ${depId}`;
+
+    exists(id, 'role', 'id')  //calls the exists function to check if id already exists in department
+        .then(data => {
+            if (!data) {    //if it doesn't exist, it inserts the new value
+                const sql = `INSERT INTO role (id, title, salary, department_id)
+                VALUES (${values})`;
+
+                db.query(sql, (err, rows) => {
+                    console.log(`successfully added (${values}) to database`)
+                    callback();
+                });
+            }
+            else {  // if it does exist, it will log a message
+                console.log(`role with id: ${id} already exists`);
+                callback();
+            }
+        })
+        .catch(err => console.log(err));
 
 
-    const sql = `INSERT INTO role (id, title, salary, department_id)
-    VALUES (${values})`;
-
-    db.query(sql, (err, rows) => {
-        console.log(`successfully added (${values}) to database`)
-        callback();
-    });
 }
 
 function addEmployee(values, callback) {
@@ -103,13 +119,23 @@ function addEmployee(values, callback) {
     const manId = parseInt(values[4]);
     values = `${id}, "${fName}", "${lName}", ${roleId}, ${manId}`
 
-    const sql = `INSERT INTO employee (id,  first_name, last_name, role_id, manager_id)
-    VALUES (${values})`;
+    exists(id, 'employee', 'id')
+        .then(data => {
+            if (!data) {
+                const sql = `INSERT INTO employee (id,  first_name, last_name, role_id, manager_id)
+                VALUES (${values})`;
 
-    db.query(sql, (err, rows) => {
-        console.log(`successfully added (${values}) to database`)
-        callback();
-    });
+                db.query(sql, (err, rows) => {
+                    console.log(`successfully added (${values}) to database`)
+                    callback();
+                });
+            }
+            else {  // if it does exist, it will log a message
+                console.log(`employee with id: ${id} already exists`);
+                callback();
+            }
+        })
+        .catch(err => console.log(err));
 }
 
 function updateEmployeeRole(values, callback) {
