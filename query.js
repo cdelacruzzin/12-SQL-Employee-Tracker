@@ -43,22 +43,17 @@ function exists(verify, table, column) {
     // returns a promise that provides a boolean indicating whether the record exists when it resolves
     return new Promise((resolve, reject) => {
         const sql = `SELECT IF (EXISTS (SELECT * FROM ${table} WHERE ${column} = ${verify}), "exists", "does not exist") AS result`;
-        //returns {result: 'exists'} or {result: 'does not exist'}
-
+        
         db.query(sql, (err, rows) => {
-            const result = rows[0].result//returns only the value of the key
-            if (result === "exists") {
-                return true;    //returns true if exists
+            if (err) {
+                reject(err); // rejects the promise if there's an error
+            } else {
+                const result = rows[0].result; //returns only the value of the key
+                resolve(result === "exists"); // resolves the promise with true or false
             }
-            return false; //returns true if does not exist
         });
     });
 }
-exists(1, 'department', 'id')
-    .then(verify => console.log(verify))
-    .catch(err => console.error(err));
-
-
 
 
 //add if values already exist, show message
@@ -66,14 +61,19 @@ function addDept(values, callback) {
     const id = parseInt(values[0]);
     const title = values[1];
 
+
+    exists(1, 'department', 'id')
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+    
     console.log(id, ' ', title);
     const sql = `INSERT INTO department (id, department_name) VALUES (${id}, "${title}")`;
-
-    db.query(sql, (err, rows) => {
-        console.log(`successfully added (${values}) to database`)
-        callback();
-    });
 }
+    // db.query(sql, (err, rows) => {
+    //     console.log(`successfully added (${values}) to database`)
+    //     callback();
+    // });
+
 
 
 function addRole(values, callback) {
