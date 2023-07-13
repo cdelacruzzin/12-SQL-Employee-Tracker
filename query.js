@@ -2,8 +2,6 @@
 require('dotenv').config();
 const mysql = require('mysql2');
 
-
-
 const db = mysql.createConnection({
     host: 'localhost',
     user: process.env.DB_USER,
@@ -12,6 +10,8 @@ const db = mysql.createConnection({
 });
 
 
+
+// views all department in database
 function viewDep(callback) {
     const sql = `SELECT * FROM department`;
     console.log('\n');
@@ -20,7 +20,7 @@ function viewDep(callback) {
         callback();
     });
 }
-
+// views all role in database
 function viewRoles(callback) {
     const sql = `SELECT * FROM role`;
     db.query(sql, (err, rows) => {
@@ -28,7 +28,7 @@ function viewRoles(callback) {
         callback();
     });
 }
-
+// views all employees in database
 function viewEmployee(callback) {
     const sql = `SELECT * FROM employee`;
     db.query(sql, (err, rows) => {
@@ -119,9 +119,9 @@ function addEmployee(values, callback) {
     const manId = parseInt(values[4]);
     values = `${id}, "${fName}", "${lName}", ${roleId}, ${manId}`
 
-    exists(id, 'employee', 'id')
+    exists(id, 'employee', 'id')    //calls the exists function to check if id already exists in department
         .then(data => {
-            if (!data) {
+            if (!data) {//if it doesn't exist, it inserts the new value
                 const sql = `INSERT INTO employee (id,  first_name, last_name, role_id, manager_id)
                 VALUES (${values})`;
 
@@ -143,7 +143,7 @@ function updateEmployeeRole(values, callback) {
     const role_id = parseInt(values[0]);
     const id = parseInt(values[1]);
 
-    const sql = `SELECT * FROM employee WHERE id = ?`;
+    const sql = `SELECT * FROM employee WHERE id = ?`;  //checks if an employee with the entered id exists
 
     db.query(sql, id, (err, result) => {
         if (err) {
@@ -151,38 +151,32 @@ function updateEmployeeRole(values, callback) {
         }
         if (result == "") {
             console.log('this id does not exist');
-            return;
+            return;     //if the result is empty, logs a message, and returns the function
         }
 
-        const sql = `SELECT * FROM role WHERE id = ?`;
+        const sql = `SELECT * FROM role WHERE id = ?`;  //checks if a role with the entered role id exists
+
         db.query(sql, role_id, (err, result) => {
-            // console.log(result);
             if (err) {
                 console.log(err);
             }
             if (result == "") {
                 console.log('this role id does not exist');
-                return;
+                return;     //if the result is empty, logs a message, and returns the function
             }
 
-            const sql = `UPDATE employee SET role_id = ? WHERE id = ?`;
+            const sql = `UPDATE employee SET role_id = ? WHERE id = ?`;     //updates the role of the employee
             db.query(sql, [role_id, id], (err, result) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log('Employee role updated successfully.');
+                console.log('Employee role updated successfully.'); 
                 callback();
             });
         });
 
     });
 }
-
-// viewEmployee();
-// updateEmployeeRole();
-// viewRoles();
-// viewDep();
-// viewEmployee();
 
 
 module.exports = { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee, updateEmployeeRole }

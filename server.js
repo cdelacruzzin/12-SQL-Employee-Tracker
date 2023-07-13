@@ -10,7 +10,7 @@ async function runPrompts() {
 runPrompts();
 
 async function addDeptPrompt() {
-    const response = await deptInquiry(runPrompts);
+    const response = await deptInquiry(runPrompts);     // logs the value that deptInquiry(runPrompts) resolved to
     console.log(response);
 }
 
@@ -29,13 +29,13 @@ async function updateEmployeePrompt() {
 }
 
 // console.log("view all departments" === answer);
-const  { viewDep, viewRoles, viewEmployee, addDept, addRole, addEmployee, updateEmployeeRole } = require('./query');
+const  { viewDep, viewRoles, viewEmployee} = require('./query');
 
 function resSwitch(response) {
     console.log('\n');
     switch (response) {
         case "view all departments": 
-        viewDep(runPrompts);
+        viewDep(runPrompts);    //calls viewDep with runPrompts as its argument
             break;
     
         case "view all roles": 
@@ -66,5 +66,3 @@ function resSwitch(response) {
             return "Unrecognized option.";
     }
 }
-
-// module.exports = {runPrompts};

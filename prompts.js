@@ -127,6 +127,7 @@ async function employeeUpdate(callback) {
     updateEmployeeRole(anser, callback);
 }
 
+// exports the following functions
 module.exports = {Prompts, deptInquiry, roleInquiry, employeeInquiry, employeeUpdate};
 
  
